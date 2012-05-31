@@ -1,0 +1,3 @@
+1	(\\d{10})	91\\1	91.*	.*	10 digit india msisdn prefixed with 91
+2	0(\\d{10})	91\\1	91.*	.*	zero prefix 10 digit india msisdn prefixed with 91
+3	\\+91(\\d{10})	91\\1	91.*	.*	zero prefix 10 digit india msisdn prefixed with 91
