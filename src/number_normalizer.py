@@ -30,7 +30,7 @@ class NumNormalizer:
         logger.critical("No rows found [%d] in tbl_number_normalizer. Terminating application now ", numrows)
         sys.exit(1)
       else:
-        logger.critical("[%d] rows found in tbl_number_normalizer. loading now ", numrows)
+        logger.info("[%d] rows found in tbl_number_normalizer. loading now ", numrows)
     except:
       logger.critical("Failed to run query %s. Terminating now", l_query)
       logger.exception(traceback.print_exc())

@@ -54,6 +54,8 @@ class UVConf:
 
 def init_logger(app_name, log_filename, log_level=logging.DEBUG):
   try:
+    sys.stderr.write('app name = %s file name = %s log level = %d\n' %(app_name, log_filename, log_level))
+    sys.stderr.flush()
     logger = logging.getLogger(app_name)
     hdlr = logging.FileHandler(log_filename)  
     formatter = logging.Formatter('%(asctime)s|%(process)-5d|%(thread)d|%(filename)-16s|%(funcName)-16s|%(lineno)4d|%(levelname)-8s| %(message)s')

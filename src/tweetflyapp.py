@@ -15,7 +15,12 @@ class TweetFlyApp:
   normalizer = None
 
   def init(self, p_conf_filename, p_log_filename, p_log_level):
-    #TODO validate log_level
+
+    if ( False == os.path.exists(os.path.dirname(p_log_filename)) ):
+      sys.stderr.write("Log directory %s does not exists. Creating new directory\n" % (os.path.dirname(p_log_filename)))
+      sys.stderr.flush()
+      os.makedirs(os.path.dirname(p_log_filename))
+
     self.app_logger = genutils.init_logger(__name__, p_log_filename, p_log_level);
     self.app_logger.info("TweetFlyApp logger initialized" )
     self.app_logger.info("p_conf_filename=%s p_log_filename=%s p_log_level=%s" ,p_conf_filename, p_log_filename ,str(p_log_level)  )
@@ -24,9 +29,6 @@ class TweetFlyApp:
       self.app_logger.critical("Configuration file %s does not exists. Terminating application now", p_conf_filename)
       sys.exit(1)
 
-    if ( False == os.path.exists(os.path.dirname(p_log_filename)) ):
-      self.app_logger.warning("Log directory %s does not exists. Creating new directory", os.path.dirname(p_log_filename))
-      os.makedirs(os.path.dirname(p_log_filename))
       
       
     conf_filename = p_conf_filename

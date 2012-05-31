@@ -18,7 +18,7 @@ class DBCon:
 
     try:
       self.db = MySQLdb.connect(host=l_host, user=l_user, passwd=l_passwd, db=l_db) 
-      logger.critical("connected to database. %s", str(self.db))
+      logger.info("connected to database. %s", str(self.db))
     except:
       logger.critical("Failed to connect to database. Terminating now. Traceback ...")
       logger.exception(traceback.print_exc())
