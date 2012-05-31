@@ -55,7 +55,6 @@ class TweetFlyApp:
   
 
 def main(argv):
-  #Looks like no additional configuration parameters
   l_conf_filename = '/usr/local/uv/conf/tweetfly.conf'
   l_log_filename = "/usr/local/uv/log/tweetfly.log"
   l_log_level = logging.DEBUG
