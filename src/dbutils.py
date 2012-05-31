@@ -1,16 +1,26 @@
-
 import re,os,sys
 import MySQLdb
+import traceback
+from patterns import singleton
+from genutils import UVConf
 
-class NumNormalizer:
 
-  def load_rules_from_db(self):
-    db = MySQLdb.connect(host="localhost", user="root", passwd="root",db="uv_core")
-    cursor = db.cursor()
-    cursor.execute("SELECT id, in_pattern, out_pattern, telco_id, channel, description FROM tbl_number_normalizer")
-    numrows = int(cursor.rowcount)
-    if numrows == 0:
-      logger
-    for x in range(0,numrows):
-      row = cursor.fetchone()
-      print row[0], "-->", row[1]
+@singleton
+class DBCon:
+  db = None
+  def get_connection(self, logger):
+    conf = UVConf();
+    l_host = conf.get("db","coredb_host")
+    l_user = conf.get("db","coredb_user")
+    l_passwd = conf.get("db","coredb_passwd")
+    l_db = conf.get("db","coredb_name")
+    logger.info("Mysql Connection setup params - host = %s, user = %s, passwd = %s, db = %s", l_host, l_user, l_passwd, l_db)
+
+    try:
+      self.db = MySQLdb.connect(host=l_host, user=l_user, passwd=l_passwd, db=l_db) 
+      logger.critical("connected to database. %s", str(self.db))
+    except:
+      logger.critical("Failed to connect to database. Terminating now. Traceback ...")
+      logger.exception(traceback.print_exc())
+      sys.exit(1)
+    return self.db

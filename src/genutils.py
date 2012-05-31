@@ -19,16 +19,16 @@ class UVConf:
     #  uv_home_path = '/usr/local/uv/'
 
     try:
-      uvconf = ConfigParser.RawConfigParser()
-      uvconf.read(app_conf_filename)
+      self.uvconf = ConfigParser.RawConfigParser()
+      self.uvconf.read(app_conf_filename)
       app_logger.info("UVConf initialization done for conf file %s.", app_conf_filename)
       app_logger.info("uvconf sections are ")
 
-      for sec in uvconf.sections():
+      for sec in self.uvconf.sections():
         app_logger.info(("%s"% sec).center(60,'*'))
         #app_logger.info("***************** %25s *************** ", sec)
-        for option in uvconf.options(sec):
-          app_logger.info("%16s => %-16s ", option, uvconf.get(sec, option))
+        for option in self.uvconf.options(sec):
+          app_logger.info("%16s => %-16s ", option, self.uvconf.get(sec, option))
 
     except:
       app_logger.critical("UVConf initialization failed for conf file %s. Terminating now. Traceback ...", app_conf_filename)
@@ -36,20 +36,20 @@ class UVConf:
       sys.exit(1)
 
 
-  def get(p_key):
-    return uvconf.get("core", p_key)
+  def get(self, p_key):
+    return self.uvconf.get("core", p_key)
 
-  def get(p_section, p_key):
-    return uvconf.get(p_section, p_key)
+  def get(self, p_section, p_key):
+    return self.uvconf.get(p_section, p_key)
 
-  def getint(p_section, p_key):
-    return uvconf.getint(p_section, p_key)
+  def getint(self, p_section, p_key):
+    return self.uvconf.getint(p_section, p_key)
 
-  def getfloat(p_section, p_key):
-    return uvconf.getfloat(p_section, p_key)
+  def getfloat(self, p_section, p_key):
+    return self.uvconf.getfloat(p_section, p_key)
 
-  def getboolean(p_section, p_key):
-    return uvconf.getboolean(p_section, p_key)
+  def getboolean(self, p_section, p_key):
+    return self.uvconf.getboolean(p_section, p_key)
 
 
 def init_logger(app_name, log_filename, log_level=logging.DEBUG):

@@ -2,6 +2,7 @@ import sys,os
 import logging
 from patterns import singleton
 from genutils import UVConf
+from number_normalizer import NumNormalizer
 import genutils
 
 @singleton
@@ -11,6 +12,7 @@ class TweetFlyApp:
   conf_filename = "/usr/local/uv/conf/tweetfly.conf"
   log_level = logging.DEBUG
   app_conf = None
+  normalizer = None
 
   def init(self, p_conf_filename, p_log_filename, p_log_level):
     #TODO validate log_level
@@ -33,6 +35,9 @@ class TweetFlyApp:
     self.app_conf.init(self.app_logger, conf_filename);
     self.app_logger.info("TweetFlyApp configuration initialization done")
 
+    #Loading normalization rules
+    self.normalizer = NumNormalizer()
+    self.normalizer.load_rules_from_db(self.app_logger) 
 
   def start(self):
     #TODO Initialize TweetStreamListner
