@@ -3,6 +3,7 @@ import logging
 from patterns import singleton
 from genutils import UVConf
 from number_normalizer import NumNormalizer
+from user_profile_mgr import UserProfile
 import genutils
 
 @singleton
@@ -45,9 +46,11 @@ class TweetFlyApp:
     #TODO Initialize TweetStreamListner
     #TODO Authenticate
     #TODO Wait for updates
-    for i in range(10):
-      self.app_logger.info("I am running now - %d" % i)
-    pass
+    for i in range(200000):
+      phnum = '91988' + '{num:05d}'.format(num=i)
+      self.app_logger.info("I am creating userprofile - %d - %s " % (i, phnum))
+      uprofile = UserProfile()
+      uprofile.create_profile(self.app_logger,phnum)
 
   def on_tweet_update(self):
     #TODO Write tweet into db
