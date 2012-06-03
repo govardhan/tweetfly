@@ -8,7 +8,7 @@ class nrmtest1(unittest.TestCase):
   def runTest(self):
     db = DBCon().get_connection(logger)
     self.assertTrue(db)
-
+"""
 #checking if it is exiting if there are no rows
 class nrmtest2(unittest.TestCase):
   def runTest(self):
@@ -41,6 +41,7 @@ class nrmtest6(unittest.TestCase):
     u_query="alter table mytable drop in_pattern"
     self.assertTrue(logger.info)
     d_query="drop table mytable"
+"""
 if __name__ == '__main__':
   unittest.main()
 
